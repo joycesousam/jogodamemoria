@@ -27,7 +27,12 @@
 
     /** função para iniciar jogo */ 
 	function startGame () {
+        images = randomSort(images);
+        /**aray imagens vai receber o resultado do processo
+         * de embaralhamento da função passando o array como parametro 
+        */
 
+        /**chamar funçao responsavel por embaralhar carta */
         /** var -> armazenar referencia de todos os divs 
         que possui clace face */
         
@@ -55,6 +60,31 @@
         }  
     }
 
+    /**Funçao embaralhar carta*/
+    function randomSort(oldArray){
+    /**funçao nativa que gera numeros aleatorios */
+    /**floor arrendondar sempre para baixo*/
+        //(Math.floor(Math.random()*11));
+        //indentifica a posiçao de um elemento dentro do arrei e retorna o valor numero desse elemento
+        //var arrTeste =["banana","morango","maca"];
+        //console.log(arrTest.length);
+
+        /**criar array vazio, avaliar o numero de elementos do array
+         * criar um indice  com valor aleatório
+         * avaliar se o elemento indicado já existe no novo array
+         * inserir o elemento indicado no novo array 
+        */
+       
+        var newArray = [];
+        while(newArray.length !== oldArray.length){
+            var i = Math.floor (Math.random()*oldArray.length);
+            if(newArray.indexOf(oldArray[i]) < 0 ){
+                newArray.push(oldArray[i]);
+            }
+        }
+
+        return newArray;
+    }
     function flipCard(){
         /**rotacionar as duas faces da carta */
         /** variavel faces recebe lista de elementos 
@@ -66,8 +96,9 @@
         /**atribuir esses elementos a uma nova classe*/
         /**varrer em busca de determinada classe pra remover se encontrar ou inserir se não   */
         /**um é back e o outro é front 0e1 */
-        faces[0].classList.toggle("flipped")
-        faces[1].classList.toggle("flipped")
+        faces[0].classList.toggle("flipped");
+        faces[1].classList.toggle("flipped");
+
     
     }
 }());
