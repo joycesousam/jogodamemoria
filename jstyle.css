@@ -7,8 +7,8 @@ body{
 
 	background-color: #A0522D;
 	text-align: center;
-}
 
+}
 #container{
 	width:1325px;
 	height:495px;
@@ -62,20 +62,36 @@ body{
 /** elemeto que tem a classe card 
 e o mouse está em cima */
 
-.card:hover{
-    box-shadow :0 0 10px #111;
+.card:hover,.face.flipped {
+    box-shadow:0 0 10px #111;
+
+}
+.face.flipped.match{
+	box-shadow: 0 0 10px #624;
+}
+
+#match{
+	position: relative;
+	margin: 0 auto;
+	top: 250px;
+	z-index: -1 ;
+	opacity: : 1;
+	transition-property : top, opacity;
+	transition-duration : 1.5s;
+
 
 }
 
-#modalGameOver {
+#fimdejogo {
 	position: absolute;
-	top: 0;
-	width: 100;
-	height: 100;
+	top:0;
+	border-radius:5px;
+	width: 100%;
+	height: 100%;
 	background-color:rgba(0,0,0,0,5);
-	z-index : -2;
+	z-index: -2;
 }
 
-#imggo {
-	margin-top : 100px;
+#imgfinal {
+	margin-top:100px;
 }
