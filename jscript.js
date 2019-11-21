@@ -2,10 +2,13 @@
     
     /**array para armazenar varios elementos */
     var images = [];
-
     var flippedCards = [];
+    var modalGameOver = document.querySelector("#modalGameOver");
+    
    
-    /**objeto e seus atributos*/
+    /** imagens para as cartas
+     * objeto var e seus atributos(imagem e id )
+     */
     for ( var i = 0; i < 16; i++ ){
         var img = {
             src:"imgweb/" + i +".png",
@@ -14,7 +17,7 @@
 
 
         images.push(img);
-         /** cada objeto gerado é armazenado no array*/
+         /** cada objeto gerado é inserido no array*/
     }
 
 
@@ -29,12 +32,11 @@
 
     /** função para iniciar jogo */ 
 	function startGame () {
+        //embaralhar as imagens do array
         images = randomSort(images);
+        //zera o array de cartas viradas 
         flippedCards = [];
-        /**aray imagens vai receber o resultado do processo
-         * de embaralhamento da função passando o array como parametro 
-        */
-
+    
         /**chamar funçao responsavel por embaralhar carta */
         /** var -> armazenar referencia de todos os divs 
         que possui clace face */
@@ -61,16 +63,12 @@
             backFaces[i].setAttribute = ("id, images[i].id");
         
         }  
+        modalGameOver.style.zIndex = -2;
+		modalGameOver.removeEventListener("click",startGame,false);
     }
 
     /**Funçao embaralhar carta*/
     function randomSort(oldArray){
-    /**funçao nativa que gera numeros aleatorios */
-    /**floor arrendondar sempre para baixo*/
-        //(Math.floor(Math.random()*11));
-        //indentifica a posiçao de um elemento dentro do arrei e retorna o valor numero desse elemento
-        //var arrTeste =["banana","morango","maca"];
-        //console.log(arrTest.length);
 
         /**criar array vazio, avaliar o numero de elementos do array
          * criar um indice  com valor aleatório
@@ -120,7 +118,15 @@
 
     
             }
-
+    window.setTimeout(function(){
+        gameOver();
+    },1000);
+            
+   
+    function gameOver(){
+        modalGameOver.style.zIndex = 99;
+        modalGameOver.addEventListener("click",startGame,false);
+    }
 
 
     

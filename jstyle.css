@@ -5,7 +5,8 @@
 
 body{
 
-    background-color: #A0522D
+	background-color: #A0522D;
+	text-align: center;
 }
 
 #container{
@@ -66,4 +67,15 @@ e o mouse está em cima */
 
 }
 
-#telaGameOver
+#modalGameOver {
+	position: absolute;
+	top: 0;
+	width: 100;
+	height: 100;
+	background-color:rgba(0,0,0,0,5);
+	z-index : -2;
+}
+
+#imggo {
+	margin-top : 100px;
+}
