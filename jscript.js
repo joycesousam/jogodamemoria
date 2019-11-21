@@ -2,6 +2,8 @@
     
     /**array para armazenar varios elementos */
     var images = [];
+
+    var flippedCards = [];
    
     /**objeto e seus atributos*/
     for ( var i = 0; i < 16; i++ ){
@@ -28,6 +30,7 @@
     /** função para iniciar jogo */ 
 	function startGame () {
         images = randomSort(images);
+        flippedCards = [];
         /**aray imagens vai receber o resultado do processo
          * de embaralhamento da função passando o array como parametro 
         */
@@ -85,19 +88,40 @@
 
         return newArray;
     }
+
     function flipCard(){
+        if(flippedCards.length < 2){
         /**rotacionar as duas faces da carta */
         /** variavel faces recebe lista de elementos 
          * a card clicada é o que dispara o evento 
          * no caso esse evento
          */
-        var faces = this.getElementsByClassName("face");
+            var faces = this.getElementsByClassName("face");
         /**console.log(faces);*/
         /**atribuir esses elementos a uma nova classe*/
         /**varrer em busca de determinada classe pra remover se encontrar ou inserir se não   */
         /**um é back e o outro é front 0e1 */
-        faces[0].classList.toggle("flipped");
-        faces[1].classList.toggle("flipped");
+            if(faces[0].classList.length >2){
+                return;
+            }
+            faces[0].classList.toggle("flipped");
+            faces[1].classList.toggle("flipped"); 
+
+            flippedCards.push(this);
+        }
+
+            else {
+                flippedCards[0].childNodes[1].classList.toggle("flipped");
+                flippedCards[0].childNodes[3].classList.toggle("flipped");
+                flippedCards[1].childNodes[1].classList.toggle("flipped");
+                flippedCards[1].childNodes[3].classList.toggle("flipped");
+
+                flippedCards = [];
+
+    
+            }
+
+
 
     
     }
