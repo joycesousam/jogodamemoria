@@ -2,13 +2,11 @@
 	//array que armazenará os objetos com src e id de 1 a 8
 	var imagens = [];
 	
-	//imagem a ser exibida em caso de acerto
+	//imagem do acerto
 	var combinacao = document.querySelector("#certo");
 	
 	//imagem de fim do jogo
     var modalfimdejogo = document.querySelector("#modalfimdejogo");
-	//var reiniciar = document.querySelector("#reinic");
-	//reiniciar.addEventListener("click",iniciar);
 	
 	//array que armazena as cartas viradas
 	var cardsVirados = [];
@@ -52,7 +50,7 @@
 		//embaralhamento do array de imagens
 		imagens = randomSort(imagens);
 		
-		//lista de elementos div com as classes back e front
+		//lista de elementos com as classes back e front
 		var backFaces = document.getElementsByClassName("back");
 		var frontFaces = document.getElementsByClassName("front");
 		
@@ -62,7 +60,7 @@
 			backFaces[i].classList.remove("match","flipped");
 			frontFaces[i].classList.remove("match","flipped");
 			
-			//posiciona as cartas no tabuleiro
+			//distriuir cartas na tela
 			var card = document.querySelector("#card" + i);
 			card.style.left = (i % 8) === 0 ? 5 + "px" : 5 + ((i % 8) * 165) + "px";
 			card.style.top = i/8 >= 1 ? 250 + "px" : 5 + "px";
@@ -75,13 +73,13 @@
 			frontFaces[i].setAttribute("id",imagens[i].id);
 		}
 		
-		//joga a imagem de game over para o plano de fundo
+		//coloca a imagem de fim de jogo para o fundo 
 		modalfimdejogo.style.zIndex = "-2";
 		
 		//remove o evento click da imagem de game over
 		modalfimdejogo.removeEventListener("click",iniciar,false);
 			
-	}//fim da função de inicialização do jogo
+	}
 	
 	
 	//função que vira as cartas
@@ -162,12 +160,13 @@
 		
 		//retorna o array novo, que possui os elementos do array passado por parâmetro embaralhados
 		return newArray;
-	}//fim da função que embaralha as cartas
+	}
 	
 	
-	//função que gera o sinal de MATCH
+	//função que gera o sinal de combinaçao certo 
 	function combinacaoCerta(){
-		//joga a mensagem de MATCH para o primeiro plano
+
+		//joga a mensagem de acerto para o primeiro plano
 		combinacao.style.zIndex = "1";
 		
 		//deixa a mensagem transparente
@@ -178,7 +177,7 @@
 		
 		//função executada após 1.5 segundo
 		setTimeout(function(){
-			//joga a mensagem de MATCH para o plano de fundo
+			//joga a mensagem de acerto para o plano de fundo
 			combinacao.style.zIndex = "-1";
 			
 			//remove a transparência da mansagem
@@ -187,7 +186,7 @@
 			//move a mensagem para o centro da tela
 			combinacao.style.top = "250px";
 		},1500);
-	}//fim da função que exibe mensagem de MATCH
+	}
 	
 
 
