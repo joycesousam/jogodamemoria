@@ -1,9 +1,9 @@
 (function(){
 	//array que armazenará os objetos com src e id de 1 a 8
-	var images = [];
+	var imagens = [];
 	
 	//imagem a ser exibida em caso de acerto
-	var matchSign = document.querySelector("#match");
+	var combinacao = document.querySelector("#certo");
 	
 	//imagem de fim do jogo
     var modalfimdejogo = document.querySelector("#modalfimdejogo");
@@ -11,17 +11,17 @@
 	//reiniciar.addEventListener("click",iniciar);
 	
 	//array que armazena as cartas viradas
-	var flippedCards = [];
+	var cardsVirados = [];
 	
 
 	//variável contadora de acertos. ao chegar em 8 o jogo termina
-	var matches = 0;
+	var acertos = 0;
 	
 	function jogarNovamente(){
         //joga a mensagem de fim do jogo para o plano da frente
 		modalfimdejogo.style.zIndex = 10 ;
 		//adiciona o evento click à imagem de game over
-		modalfimdejogo.addEventListener("click",startGame,false);
+		modalfimdejogo.addEventListener("click",iniciar,false);
 	}
 
 
@@ -35,22 +35,22 @@
 		};
 		
 		//inserer o objeto criado no array
-		images.push(img);
+		imagens.push(img);
 	}
 	
 	//chama a função de inicialização do jogo
-	startGame();
+	iniciar();
 	
 	//função de inicialização do jogo
-	function startGame(){
+	function iniciar(){
 		//zera o array de cartas viradas
-		flippedCards = [];
+		cardsVirados = [];
 		
 		//zera o contador de acertos
-		matches = 0;
+		acertos = 0;
 		
 		//embaralhamento do array de imagens
-		images = randomSort(images);
+		imagens = randomSort(imagens);
 		
 		//lista de elementos div com as classes back e front
 		var backFaces = document.getElementsByClassName("back");
@@ -68,26 +68,26 @@
 			card.style.top = i/8 >= 1 ? 250 + "px" : 5 + "px";
 			
 			//adiciona às cartas o evento click chamando a função que vira as cartas
-			card.addEventListener("click",flipCard,false);
+			card.addEventListener("click",virar,false);
 			
 			//adiciona as imagens às cartas
-			frontFaces[i].style.background = "url('" + images[i].src + "')";
-			frontFaces[i].setAttribute("id",images[i].id);
+			frontFaces[i].style.background = "url('" + imagens[i].src + "')";
+			frontFaces[i].setAttribute("id",imagens[i].id);
 		}
 		
 		//joga a imagem de game over para o plano de fundo
 		modalfimdejogo.style.zIndex = "-2";
 		
 		//remove o evento click da imagem de game over
-		modalfimdejogo.removeEventListener("click",startGame,false);
+		modalfimdejogo.removeEventListener("click",iniciar,false);
 			
 	}//fim da função de inicialização do jogo
 	
 	
 	//função que vira as cartas
-	function flipCard(){
+	function virar(){
 		//verifica se o número de cartas viradas é menor que 2
-		if(flippedCards.length < 2){
+		if(cardsVirados.length < 2){
 			//pega as faces da carta clicada
 			var faces = this.getElementsByClassName("face");
 			
@@ -101,29 +101,30 @@
 			faces[1].classList.toggle("flipped");
 			
 			//adiciona a carta clicada ao array de cartas viradas
-			flippedCards.push(this);
+			cardsVirados.push(this);
 			
 			//verifica se o número de cartas no array de cartas viradas é igual a 2
-			if(flippedCards.length === 2){
+			if(cardsVirados.length === 2){
 				//compara o id das cartas viradas para ver se houve um acerto
-				if(flippedCards[0].childNodes[3].id === flippedCards[1].childNodes[3].id){
-					//em caso de acerto adiciona a classe match a todas as faces das duas cartas presentes no array de cartas viradas
-					flippedCards[0].childNodes[1].classList.toggle("match");
-					flippedCards[0].childNodes[3].classList.toggle("match");
-					flippedCards[1].childNodes[1].classList.toggle("match");
-					flippedCards[1].childNodes[3].classList.toggle("match");
+				if(cardsVirados[0].childNodes[3].id === cardsVirados[1].childNodes[3].id){
+					//em caso de acerto adiciona a classe match a todas as faces das duas 
+					//cartas presentes no array de cartas viradas
+					cardsVirados[0].childNodes[1].classList.toggle("match");
+					cardsVirados[0].childNodes[3].classList.toggle("match");
+					cardsVirados[1].childNodes[1].classList.toggle("match");
+					cardsVirados[1].childNodes[3].classList.toggle("match");
 					
 					//chama a função que exibe a mensagem MATCH
-					matchCardsSign();
+					combinacaoCerta();
 					
 					//limpa o array de cartas viradas
-					flippedCards = [];
+					cardsVirados = [];
 					
 					//soma um ao contador de acertos
-					matches++;
+					acertos++;
 					
 					//verifica se o contador de acertos chegou a 8
-					if(matches >= 8){
+					if(acertos >= 8){
 						//caso haja 8 acertos, chama a função que finaliza o jogo
 						jogarNovamente();
 					}
@@ -131,13 +132,13 @@
 			} 
 		} else {
 			//em caso haver duas cartas no array de cartas viradas (terceiro click) remove a classe flipped das cartas no array de cartas viradas
-			flippedCards[0].childNodes[1].classList.toggle("flipped");
-			flippedCards[0].childNodes[3].classList.toggle("flipped");
-			flippedCards[1].childNodes[1].classList.toggle("flipped");
-			flippedCards[1].childNodes[3].classList.toggle("flipped");
+			cardsVirados[0].childNodes[1].classList.toggle("flipped");
+			cardsVirados[0].childNodes[3].classList.toggle("flipped");
+			cardsVirados[1].childNodes[1].classList.toggle("flipped");
+			cardsVirados[1].childNodes[3].classList.toggle("flipped");
 			
 			//limpa o array de cartas viradas
-			flippedCards = [];
+			cardsVirados = [];
 		}
 	}
 	
@@ -165,26 +166,26 @@
 	
 	
 	//função que gera o sinal de MATCH
-	function matchCardsSign(){
+	function combinacaoCerta(){
 		//joga a mensagem de MATCH para o primeiro plano
-		matchSign.style.zIndex = "1";
+		combinacao.style.zIndex = "1";
 		
 		//deixa a mensagem transparente
-		matchSign.style.opacity = "0";
+		combinacao.style.opacity = "0";
 		
 		//move a mensagem para cima
-		matchSign.style.top = "150px";
+		combinacao.style.top = "150px";
 		
 		//função executada após 1.5 segundo
 		setTimeout(function(){
 			//joga a mensagem de MATCH para o plano de fundo
-			matchSign.style.zIndex = "-1";
+			combinacao.style.zIndex = "-1";
 			
 			//remove a transparência da mansagem
-			matchSign.style.opacity = "1";
+			combinacao.style.opacity = "1";
 			
 			//move a mensagem para o centro da tela
-			matchSign.style.top = "250px";
+			combinacao.style.top = "250px";
 		},1500);
 	}//fim da função que exibe mensagem de MATCH
 	
