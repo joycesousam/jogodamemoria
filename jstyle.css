@@ -40,21 +40,21 @@ body{
 	
 }
 
-.front{
+.back{
 	background-image: url("imgweb/logodojogo.png");
  	
 }
 
-.front.flipped{
+.back.flipped{
     transform: rotateY(180deg);
 /** virar carta em 180 graus */
 
 }
-.back{
+.front{
     transform: rotateY(-180deg);
 }
 
-.back.flipped{
+.front.flipped{
     transform: rotateY(0deg);
 }
 
@@ -75,23 +75,24 @@ e o mouse está em cima */
 	margin: 0 auto;
 	top: 250px;
 	z-index: -1 ;
-	opacity: : 1;
+	opacity: 1;
 	transition-property : top, opacity;
 	transition-duration : 1.5s;
 
-
 }
 
-#fimdejogo {
+#modalfimdejogo {
 	position: absolute;
 	top:0;
 	border-radius:5px;
 	width: 100%;
 	height: 100%;
-	background-color:rgba(0,0,0,0,5);
+	background-color:rgba(0,0,0,0.5);
 	z-index: -2;
+	/** nivel de profundidade do elemento 
+	é controlado pelo eixo z */
 }
 
-#imgfinal {
+#imagemFinal {
 	margin-top:100px;
 }
